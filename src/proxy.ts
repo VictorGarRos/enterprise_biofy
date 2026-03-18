@@ -7,7 +7,6 @@ const key = new TextEncoder().encode(process.env.JWT_SECRET || 'secret');
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  // Allow public paths
   if (
     path === '/login' ||
     path === '/favicon.ico' ||
@@ -18,7 +17,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Read cookie directly from request (works in Edge runtime)
   const token = request.cookies.get('auth_token')?.value;
 
   if (!token) {
