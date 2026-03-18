@@ -26,6 +26,16 @@ model Campaign {
   insights        DailyInsight[]
 }
 
+model CrmSnapshot {
+  id        Int      @id
+  eventos   Json     @default("[]")
+  pedidos   Json     @default("[]")
+  tareas    Json     @default("[]")
+  usuarios  Json     @default("[]")
+  timestamp String?
+  updatedAt DateTime @updatedAt
+}
+
 model DailyInsight {
   campaignId  String
   date        String

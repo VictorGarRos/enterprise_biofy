@@ -6,8 +6,8 @@ export function useCRMData() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch('/crm_data.json')
-            .then(r => { if (!r.ok) throw new Error('Failed to load CRM data'); return r.json(); })
+        fetch('/api/crm/data')
+            .then(r => { if (!r.ok) throw new Error('Sin datos CRM. Ejecuta un sync primero.'); return r.json(); })
             .then(json => setRawData(json))
             .catch(err => setError(err.message))
             .finally(() => setLoading(false));
