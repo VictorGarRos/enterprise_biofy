@@ -94,7 +94,7 @@ export function MetaFilters({ onUpdate, loading = false }: FiltersProps) {
                         <DropdownMenu 
                             options={[{ id: "", name: "Todas las cuentas" }, ...accounts]}
                             selectedId={selectedAccount}
-                            onSelect={(id) => { setSelectedAccount(id); setSelectedCampaign(""); setIsAccOpen(false); }}
+                            onSelect={(id: string) => { setSelectedAccount(id); setSelectedCampaign(""); setIsAccOpen(false); }}
                         />
                     )}
                 </AnimatePresence>
@@ -116,7 +116,7 @@ export function MetaFilters({ onUpdate, loading = false }: FiltersProps) {
                         <DropdownMenu 
                             options={[{ id: "", name: "Todas las campañas" }, ...campaigns]}
                             selectedId={selectedCampaign}
-                            onSelect={(id) => { setSelectedCampaign(id); setIsCampOpen(false); }}
+                            onSelect={(id: string) => { setSelectedCampaign(id); setIsCampOpen(false); }}
                             searchable
                             searchTerm={searchTerm}
                             setSearchTerm={setSearchTerm}

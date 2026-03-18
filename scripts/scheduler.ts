@@ -1,5 +1,5 @@
 import cron from 'node-cron';
-import fetch from 'node-fetch';
+// node-fetch not needed — global fetch available in Node 18+
 
 const CRM_SCRAPE_URL = process.env.CRM_SCRAPE_URL || 'http://localhost:3000/api/crm/scrape';
 

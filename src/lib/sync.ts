@@ -48,7 +48,7 @@ export async function syncMetaData() {
             impressions: parseInt(day.impressions) || 0,
             clicks: parseInt(day.clicks) || 0,
             spend: parseFloat(day.spend) || 0,
-            reach: parseInt(day.reach) || 0,
+            reaches: parseInt(day.reach) || 0,
             leads: leads,
           },
           create: {
@@ -57,7 +57,7 @@ export async function syncMetaData() {
             impressions: parseInt(day.impressions) || 0,
             clicks: parseInt(day.clicks) || 0,
             spend: parseFloat(day.spend) || 0,
-            reach: parseInt(day.reach) || 0,
+            reaches: parseInt(day.reach) || 0,
             leads: leads,
           },
         });
