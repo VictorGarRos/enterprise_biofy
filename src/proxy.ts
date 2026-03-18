@@ -4,7 +4,7 @@ import { jwtVerify } from 'jose';
 
 const key = new TextEncoder().encode(process.env.JWT_SECRET || 'secret');
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   if (
