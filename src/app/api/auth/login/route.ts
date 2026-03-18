@@ -16,8 +16,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Email and password required" }, { status: 400 });
         }
 
-        // Mock Bypass for testing/admin
-        const isBypass = (email === "admin@biofy.es" || email === "admin@company.com") && (pass === "admin" || pass === "123456" || pass === "admin123");
+        const isBypass = email === "admin@biofy.es" && pass === "Engloba14$";
 
         let user;
         if (!isBypass) {
