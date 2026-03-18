@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+}
+
+model Campaign {
+  id              String         @id
+  name            String
+  status          String
+  effectiveStatus String
+  objective       String
+  adAccountId     String
+  lastSyncAt      DateTime       @default(now())
+  insights        DailyInsight[]
+}
+
+model DailyInsight {
+  campaignId  String
+  date        String
+  impressions Int    @default(0)
+  clicks      Int    @default(0)
+  spend       Float  @default(0.0)
+  reaches     Int    @default(0) @map("reach")
+  leads       Int    @default(0)
+  campaign    Campaign @relation(fields: [campaignId], references: [id])
+
+  @@id([campaignId, date])
+}
