@@ -78,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="lg:hidden fixed inset-0 bg-black/30 z-30"
+              className="lg:hidden fixed inset-0 bg-black/30 z-[90]"
               onClick={() => setSidebarOpen(false)}
             />
           )}
@@ -92,7 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               animate={{ x: 0 }}
               exit={{ x: -260 }}
               transition={{ type: 'spring', damping: 28, stiffness: 220 }}
-              className="fixed lg:static w-64 h-full bg-white border-r border-gray-100 flex flex-col z-40 shadow-sm"
+              className="fixed lg:static w-64 h-full bg-white border-r border-gray-100 flex flex-col z-[100] shadow-lg"
             >
               {/* Logo */}
               <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
@@ -162,7 +162,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Main content */}
         <main className="flex-1 h-screen overflow-y-auto bg-[#F4F4FB] min-w-0">
           {/* Top bar */}
-          <div className="sticky top-0 z-30 bg-[#F4F4FB]/90 backdrop-blur-sm border-b border-gray-200/60 px-4 md:px-8 py-3 flex items-center justify-between gap-3">
+          <div className="sticky top-0 z-20 bg-[#F4F4FB]/90 backdrop-blur-sm border-b border-gray-200/60 px-4 md:px-8 py-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <button
                 className="p-2 bg-white rounded-xl shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors flex-shrink-0"
