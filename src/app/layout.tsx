@@ -11,7 +11,6 @@ import {
   Menu,
   X,
   Activity,
-  Bell,
   Search
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -178,13 +177,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   className="bg-transparent text-sm text-gray-600 placeholder-gray-400 outline-none w-full"
                 />
               </div>
-            </div>
-            <div className="flex items-center gap-2 md:gap-3">
-              <button className="relative p-2 bg-white rounded-xl border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors">
-                <Bell className="w-4 h-4 text-gray-500" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">3</span>
-              </button>
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-violet-500 shadow-sm flex-shrink-0" />
             </div>
           </div>
 
