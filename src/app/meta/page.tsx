@@ -66,7 +66,7 @@ export default function MetaAnalyticsPage() {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <p className="text-sm text-gray-500 font-medium">Análisis de campañas</p>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Meta Ads Insights</h1>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Meta Ads Insights</h1>
           <p className="text-gray-400 text-sm mt-1">Sincronización en tiempo real con Meta Graph API.</p>
         </div>
         <div className="flex items-center gap-3">
@@ -99,7 +99,7 @@ export default function MetaAnalyticsPage() {
             <MetaFilters onUpdate={fetchData} loading={loading} />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             <MetricCard label="Inversión"       value={`€${totals.spend.toFixed(2)}`}      icon={DollarSign} color="indigo"  loading={loading} />
             <MetricCard label="Leads Totales"   value={String(totals.leads)}               icon={Target}     color="violet"  loading={loading} />
             <MetricCard label="Costo por Lead"  value={`€${cpl.toFixed(2)}`}               icon={Zap}        color="amber"   loading={loading} />

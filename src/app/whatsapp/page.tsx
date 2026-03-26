@@ -181,9 +181,9 @@ export default function WhatsAppPage() {
   );
 
   return (
-    <div className="h-[calc(100vh-160px)] flex flex-col lg:flex-row gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="flex flex-col lg:flex-row gap-4 md:gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Sidebar: Leads List */}
-      <div className="w-full lg:w-[400px] flex flex-col premium-card overflow-hidden">
+      <div className="w-full lg:w-[360px] xl:w-[400px] flex flex-col premium-card overflow-hidden" style={{ height: 'calc(100vh - 140px)', minHeight: 320 }}>
         <div className="p-6 border-b border-gray-100 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-black text-gray-900 tracking-tight">Leads Entrantes</h2>
@@ -221,7 +221,7 @@ export default function WhatsAppPage() {
       </div>
 
       {/* Main Area: Chat + Details */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-6 h-full min-h-0">
+      <div className="flex-1 flex flex-col lg:flex-row gap-4 md:gap-6 min-h-0" style={{ height: 'calc(100vh - 140px)', minHeight: 400 }}>
         {selectedLead ? (
           <>
             {/* iPhone Mockup */}
@@ -236,7 +236,7 @@ export default function WhatsAppPage() {
             </div>
 
             {/* Right Panel: Lead Details */}
-            <div className="w-full lg:w-[320px] premium-card p-6 flex flex-col gap-8 overflow-y-auto">
+            <div className="w-full lg:w-[300px] xl:w-[320px] premium-card p-4 md:p-6 flex flex-col gap-6 md:gap-8 overflow-y-auto">
               <div className="space-y-4">
                 <div className="w-16 h-16 rounded-3xl bg-indigo-50 border-2 border-indigo-100 flex items-center justify-center text-indigo-500">
                   <Tag className="w-8 h-8" />

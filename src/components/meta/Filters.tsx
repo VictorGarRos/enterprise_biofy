@@ -76,7 +76,7 @@ export function MetaFilters({ onUpdate, loading = false }: FiltersProps) {
     };
 
     return (
-        <div className="premium-card p-6 flex flex-col xl:flex-row flex-wrap items-end gap-6">
+        <div className="premium-card p-4 md:p-6 flex flex-col xl:flex-row flex-wrap items-end gap-4 md:gap-6">
             <div className="flex flex-col gap-2 w-full md:w-64 relative" ref={accDropdownRef}
                 onMouseLeave={() => { accCloseTimer.current = setTimeout(() => setIsAccOpen(false), 150); }}
                 onMouseEnter={() => { if (accCloseTimer.current) clearTimeout(accCloseTimer.current); }}>

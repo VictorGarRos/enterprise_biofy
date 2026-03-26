@@ -44,7 +44,7 @@ export function SalesChart({
     const activeBars = bars || [{ key: barKey, name: barName, color: "#ef4444" }];
 
     return (
-        <div className="premium-card p-6 h-[400px]">
+        <div className="premium-card p-4 md:p-6 h-[280px] md:h-[400px]">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
                 <div>
                     <h3 className="text-base font-bold text-gray-900 tracking-tight">{title}</h3>

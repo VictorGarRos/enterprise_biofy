@@ -59,7 +59,7 @@ export function DashboardFilters({
         ...cuentas.map(c => ({ value: c, label: c }))
     ];
 
-    const cols = hideTipoFilter ? 'grid-cols-2 md:grid-cols-3' : 'grid-cols-2 md:grid-cols-4';
+    const cols = hideTipoFilter ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-4';
 
     return (
         <div className="relative z-30 flex flex-col gap-4 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm">

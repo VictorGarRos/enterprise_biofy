@@ -21,20 +21,20 @@ export default function Dashboard() {
     <div className="space-y-8 pb-12">
       <header>
         <p className="text-sm text-gray-500 font-medium">Hola, Admin Biofy</p>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Panel General</h1>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Panel General</h1>
       </header>
 
       {/* Metric Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
         <StatCard label="Total Leads"    value="1,284" change="+12.5%" trend="up"   icon={Users}       color="indigo" />
         <StatCard label="Conv. WhatsApp" value="452"   change="+5.2%"  trend="up"   icon={MessageSquare} color="emerald" />
         <StatCard label="Gasto Meta"     value="€8,420" change="-2.4%" trend="down" icon={Target}      color="violet" />
         <StatCard label="Retorno CRM"    value="24.8%" change="+8.1%"  trend="up"   icon={TrendingUp}  color="amber" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
         {/* Main Chart */}
-        <div className="lg:col-span-2 premium-card p-6">
+        <div className="lg:col-span-2 premium-card p-4 md:p-6">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h3 className="font-bold text-base text-gray-900">Crecimiento Mensual</h3>
@@ -45,7 +45,7 @@ export default function Dashboard() {
               <option>Año actual</option>
             </select>
           </div>
-          <div className="h-[280px] w-full">
+          <div className="h-[200px] md:h-[280px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data}>
                 <defs>

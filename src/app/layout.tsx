@@ -14,14 +14,27 @@ import {
   Bell,
   Search
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
   const isLoginPage = pathname === '/login';
+
+  // Open sidebar by default on large screens, closed on mobile
+  useEffect(() => {
+    const handleResize = () => setSidebarOpen(window.innerWidth >= 1024);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Close sidebar on route change on mobile
+  useEffect(() => {
+    if (window.innerWidth < 1024) setSidebarOpen(false);
+  }, [pathname]);
 
   const menuGroups = [
     {
@@ -58,13 +71,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es">
       <body className="flex h-screen bg-[#F4F4FB] text-gray-900 overflow-hidden">
 
-        {/* Mobile toggle */}
-        <button
-          className="lg:hidden absolute top-4 left-4 z-50 p-2 bg-white rounded-xl shadow-sm border border-gray-200"
-          onClick={() => setSidebarOpen(!isSidebarOpen)}
-        >
-          {isSidebarOpen ? <X size={18} className="text-gray-600" /> : <Menu size={18} className="text-gray-600" />}
-        </button>
+        {/* Mobile backdrop */}
+        <AnimatePresence>
+          {isSidebarOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="lg:hidden fixed inset-0 bg-black/30 z-30"
+              onClick={() => setSidebarOpen(false)}
+            />
+          )}
+        </AnimatePresence>
 
         {/* Sidebar */}
         <AnimatePresence mode="wait">
@@ -77,9 +95,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               className="fixed lg:static w-64 h-full bg-white border-r border-gray-100 flex flex-col z-40 shadow-sm"
             >
               {/* Logo */}
-              <div className="px-6 py-5 border-b border-gray-100">
+              <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.png" alt="Culligan Biofy" style={{ width: 140, height: 'auto' }} />
+                <img src="/logo.png" alt="Culligan Biofy" style={{ width: 130, height: 'auto' }} />
+                <button
+                  className="lg:hidden p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  <X size={16} className="text-gray-500" />
+                </button>
               </div>
 
               {/* Nav */}
@@ -136,27 +160,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </AnimatePresence>
 
         {/* Main content */}
-        <main className="flex-1 h-screen overflow-y-auto bg-[#F4F4FB]">
+        <main className="flex-1 h-screen overflow-y-auto bg-[#F4F4FB] min-w-0">
           {/* Top bar */}
-          <div className="sticky top-0 z-30 bg-[#F4F4FB]/90 backdrop-blur-sm border-b border-gray-200/60 px-8 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-2 border border-gray-200 shadow-sm w-64">
-              <Search className="w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Buscar..."
-                className="bg-transparent text-sm text-gray-600 placeholder-gray-400 outline-none w-full"
-              />
-            </div>
+          <div className="sticky top-0 z-30 bg-[#F4F4FB]/90 backdrop-blur-sm border-b border-gray-200/60 px-4 md:px-8 py-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
+              <button
+                className="p-2 bg-white rounded-xl shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors flex-shrink-0"
+                onClick={() => setSidebarOpen(!isSidebarOpen)}
+              >
+                <Menu size={16} className="text-gray-600" />
+              </button>
+              <div className="hidden sm:flex items-center gap-2 bg-white rounded-xl px-4 py-2 border border-gray-200 shadow-sm w-48 md:w-64">
+                <Search className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Buscar..."
+                  className="bg-transparent text-sm text-gray-600 placeholder-gray-400 outline-none w-full"
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-2 md:gap-3">
               <button className="relative p-2 bg-white rounded-xl border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors">
                 <Bell className="w-4 h-4 text-gray-500" />
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">3</span>
               </button>
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-violet-500 shadow-sm" />
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-violet-500 shadow-sm flex-shrink-0" />
             </div>
           </div>
 
-          <div className="p-8 max-w-7xl mx-auto">
+          <div className="p-4 md:p-8 max-w-7xl mx-auto">
             {children}
           </div>
         </main>

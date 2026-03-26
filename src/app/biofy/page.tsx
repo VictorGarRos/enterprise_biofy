@@ -299,14 +299,14 @@ export default function CRMBiofyPage() {
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <p className="text-sm text-gray-500 font-medium">Gestión de equipo</p>
-                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">Análisis por empleado</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Análisis por empleado</h1>
                     <p className="text-gray-400 text-sm mt-0.5">Análisis avanzado de rendimiento CRM y conversiones.</p>
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
                     <button
                         onClick={handleRefresh}
                         disabled={isRefreshing}
@@ -385,7 +385,7 @@ export default function CRMBiofyPage() {
             )}
 
             {mode === 'TELEOPERADORA' && (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                     <MetricCard label="Cedidos" value={metrics.entregados} icon={Users} color="text-zinc-400" loading={loading} />
                     <MetricCard label="Concertados" value={metrics.confirmados} icon={CalendarCheck} color="text-blue-400" loading={loading} />
                     <MetricCard label="Nulos" value={metrics.nulos} icon={XCircle} color="text-red-400" loading={loading} />

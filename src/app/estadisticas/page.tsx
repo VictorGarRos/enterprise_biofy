@@ -114,7 +114,7 @@ export default function EstadisticasPage() {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <p className="text-sm text-gray-500 font-medium">Rendimiento comercial</p>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Estadísticas</h1>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Estadísticas</h1>
           <p className="text-gray-400 text-sm mt-0.5">Marzo 2026</p>
         </div>
         <div className="flex items-center gap-3 flex-wrap">
@@ -130,7 +130,7 @@ export default function EstadisticasPage() {
       </header>
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <KpiCard title="Producción"    value="89"  sub="visitas mes"  icon={Users}       color="text-indigo-600" bg="bg-indigo-50" />
         <KpiCard title="Ventas Brutas" value="71"  sub="total equipo" icon={TrendingUp}   color="text-emerald-600" bg="bg-emerald-50" />
         <KpiCard title="Retrocesos"    value="-6"  sub="cancelaciones" icon={TrendingDown} color="text-red-500"    bg="bg-red-50"    />
@@ -183,7 +183,7 @@ export default function EstadisticasPage() {
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <div className="mt-3 pt-4 border-t border-gray-100 grid grid-cols-4 gap-3">
+          <div className="mt-3 pt-4 border-t border-gray-100 grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { tipo: 'ULTRA', valor: 0,  color: 'text-gray-400' },
               { tipo: 'PLUS',  valor: 8,  color: 'text-indigo-600' },

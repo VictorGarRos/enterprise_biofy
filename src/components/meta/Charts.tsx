@@ -6,7 +6,7 @@ import { Calendar, TrendingUp, Target } from "lucide-react";
 
 export function MetaAnalyticsChart({ data }: { data: any[] }) {
     if (!data || data.length === 0) return (
-        <div className="h-[440px] premium-card flex items-center justify-center text-gray-400 font-bold uppercase tracking-widest text-xs">
+        <div className="h-[280px] md:h-[440px] premium-card flex items-center justify-center text-gray-400 font-bold uppercase tracking-widest text-xs">
             No hay datos suficientes para mostrar el gráfico histórico.
         </div>
     );
@@ -38,7 +38,7 @@ export function MetaAnalyticsChart({ data }: { data: any[] }) {
                 </div>
             </div>
 
-            <div className="flex-1 w-full min-h-[280px]">
+            <div className="flex-1 w-full min-h-[180px] md:min-h-[280px]">
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={data} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
                         <defs>
