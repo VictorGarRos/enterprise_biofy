@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import {
     Users,
     Settings,
@@ -301,20 +301,21 @@ export default function CRMBiofyPage() {
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white uppercase italic">Análisis por empleado</h1>
-                    <p className="text-zinc-500 font-medium mt-1">Análisis avanzado de rendimiento CRM y conversiones.</p>
+                    <p className="text-sm text-gray-500 font-medium">Gestión de equipo</p>
+                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">Análisis por empleado</h1>
+                    <p className="text-gray-400 text-sm mt-0.5">Análisis avanzado de rendimiento CRM y conversiones.</p>
                 </div>
 
                 <div className="flex gap-3">
                     <button
                         onClick={handleRefresh}
                         disabled={isRefreshing}
-                        className="bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest border border-zinc-700/50 flex items-center gap-3 transition-all active:scale-95 disabled:opacity-50"
+                        className="bg-white hover:bg-gray-50 text-gray-700 px-5 py-2.5 rounded-xl font-semibold text-xs uppercase tracking-wider border border-gray-200 flex items-center gap-2 transition-all active:scale-95 disabled:opacity-50 shadow-sm"
                     >
                         <RefreshCcw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
                         Sync CRM
                     </button>
-                    <div className="bg-zinc-900/50 p-1 rounded-2xl flex gap-1 border border-zinc-800">
+                    <div className="bg-gray-100 p-1 rounded-xl flex gap-1">
                         <ModeTab active={mode === 'COMERCIAL'} onClick={() => handleModeChange('COMERCIAL')} icon={Users} label="Comercial" />
                         <ModeTab active={mode === 'TECNICO'} onClick={() => handleModeChange('TECNICO')} icon={Settings} label="Técnico" />
                         <ModeTab active={mode === 'TELEOPERADORA'} onClick={() => handleModeChange('TELEOPERADORA')} icon={PhoneCall} label="Tele" />
@@ -323,13 +324,13 @@ export default function CRMBiofyPage() {
             </header>
 
             {data?.timestamp && (
-                <p className="text-xs text-zinc-600 font-medium">
+                <p className="text-xs text-gray-400 font-medium">
                     Última actualización: {new Date(data.timestamp).toLocaleString('es-ES')}
                 </p>
             )}
 
             {error && (
-                <div className="bg-red-900/20 border border-red-700/30 rounded-xl p-4 text-red-400 text-sm">
+                <div className="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-600 text-sm">
                     Error al cargar datos CRM: {error}
                 </div>
             )}
@@ -438,8 +439,9 @@ function ModeTab({ active, onClick, icon: Icon, label }: any) {
     return (
         <button
             onClick={onClick}
-            className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest flex items-center gap-2 transition-all duration-300
-        ${active ? 'bg-blue-600 text-white shadow-xl shadow-blue-500/20' : 'text-zinc-500 hover:text-zinc-300'}`}
+            className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all duration-200 ${
+                active ? 'bg-white text-indigo-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+            }`}
         >
             <Icon className="w-4 h-4" />
             <span className="hidden sm:inline">{label}</span>

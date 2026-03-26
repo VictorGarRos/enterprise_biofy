@@ -62,7 +62,7 @@ export function DashboardFilters({
     const cols = hideTipoFilter ? 'grid-cols-2 md:grid-cols-3' : 'grid-cols-2 md:grid-cols-4';
 
     return (
-        <div className="relative z-30 flex flex-col gap-4 p-4 bg-zinc-900/30 rounded-lg border border-zinc-800">
+        <div className="relative z-30 flex flex-col gap-4 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm">
             <div className={`grid ${cols} gap-4`}>
                 <CustomSelect
                     label={userLabel}

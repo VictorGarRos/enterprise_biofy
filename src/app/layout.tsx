@@ -2,35 +2,43 @@
 
 import './globals.css';
 import { usePathname, useRouter } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  MessageSquare, 
-  Settings, 
-  BarChart3, 
-  Users, 
+import {
+  LayoutDashboard,
+  MessageSquare,
+  BarChart3,
+  Users,
   LogOut,
   Menu,
   X,
-  Plus
+  Activity,
+  Bell,
+  Search
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const isLoginPage = pathname === '/login';
 
-  const menuItems = [
-    { name: 'Dashboard General', icon: LayoutDashboard, path: '/' },
-    { name: 'Gestión WhatsApp', icon: MessageSquare, path: '/whatsapp' },
-    { name: 'Meta Analytics', icon: BarChart3, path: '/meta' },
-    { name: 'CRM Biofy', icon: Users, path: '/biofy' },
+  const menuGroups = [
+    {
+      label: 'Principal',
+      items: [
+        { name: 'Dashboard General', icon: LayoutDashboard, path: '/' },
+        { name: 'Gestión WhatsApp',  icon: MessageSquare,   path: '/whatsapp' },
+        { name: 'Meta Analytics',    icon: BarChart3,        path: '/meta' },
+        { name: 'CRM Biofy',         icon: Users,            path: '/biofy' },
+      ],
+    },
+    {
+      label: 'Análisis',
+      items: [
+        { name: 'Estadísticas', icon: Activity, path: '/estadisticas' },
+      ],
+    },
   ];
 
   const handleLogout = () => {
@@ -48,70 +56,78 @@ export default function RootLayout({
 
   return (
     <html lang="es">
-      <body className="flex h-screen bg-[#09090b] text-zinc-100 overflow-hidden">
-        {/* Toggle Mobile Menu */}
-        <button 
-          className="lg:hidden absolute top-4 left-4 z-50 p-2 bg-zinc-800 rounded-lg"
+      <body className="flex h-screen bg-[#F4F4FB] text-gray-900 overflow-hidden">
+
+        {/* Mobile toggle */}
+        <button
+          className="lg:hidden absolute top-4 left-4 z-50 p-2 bg-white rounded-xl shadow-sm border border-gray-200"
           onClick={() => setSidebarOpen(!isSidebarOpen)}
         >
-          {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+          {isSidebarOpen ? <X size={18} className="text-gray-600" /> : <Menu size={18} className="text-gray-600" />}
         </button>
 
         {/* Sidebar */}
         <AnimatePresence mode="wait">
           {isSidebarOpen && (
-            <motion.aside 
-              initial={{ x: -250 }}
+            <motion.aside
+              initial={{ x: -260 }}
               animate={{ x: 0 }}
-              exit={{ x: -250 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed lg:static w-72 h-full glass border-r border-zinc-900 flex flex-col z-40"
+              exit={{ x: -260 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 220 }}
+              className="fixed lg:static w-64 h-full bg-white border-r border-gray-100 flex flex-col z-40 shadow-sm"
             >
-              <div className="p-8">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-xl shadow-lg shadow-blue-500/20">
-                    B
-                  </div>
-                  <span className="text-xl font-bold tracking-tight">Culligan Biofy</span>
-                </div>
+              {/* Logo */}
+              <div className="px-6 py-5 border-b border-gray-100">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo.png" alt="Culligan Biofy" style={{ width: 140, height: 'auto' }} />
               </div>
 
-              <div className="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
-                <p className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 px-4 mb-4">Principal</p>
-                {menuItems.map((item) => {
-                  const isActive = pathname === item.path;
-                  return (
-                    <button
-                      key={item.path}
-                      onClick={() => router.push(item.path)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
-                        isActive 
-                        ? 'bg-blue-600/10 text-blue-500 border border-blue-600/20' 
-                        : 'text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-100'
-                      }`}
-                    >
-                      <item.icon className={`w-5 h-5 ${isActive ? 'text-blue-500' : 'group-hover:text-blue-100'}`} />
-                      <span className="text-sm font-medium">{item.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="p-4 mt-auto border-t border-zinc-900">
-                <div className="mb-4 glass p-4 rounded-xl space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 border border-white/10" />
-                    <div>
-                      <p className="text-xs font-bold">Admin Biofy</p>
-                      <p className="text-[10px] text-zinc-500">Administrador</p>
+              {/* Nav */}
+              <nav className="flex-1 px-3 py-4 space-y-5 overflow-y-auto">
+                {menuGroups.map((group) => (
+                  <div key={group.label}>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-3 mb-2">
+                      {group.label}
+                    </p>
+                    <div className="space-y-0.5">
+                      {group.items.map((item) => {
+                        const isActive = pathname === item.path;
+                        return (
+                          <button
+                            key={item.path}
+                            onClick={() => router.push(item.path)}
+                            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 group ${
+                              isActive
+                                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200'
+                                : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900'
+                            }`}
+                          >
+                            <item.icon className={`w-4.5 h-4.5 ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-700'}`} size={18} />
+                            <span className="text-sm font-medium">{item.name}</span>
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
+                ))}
+              </nav>
+
+              {/* Bottom user */}
+              <div className="p-4 border-t border-gray-100">
+                <div className="flex items-center gap-3 px-2 mb-3">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center text-white text-xs font-bold shadow">
+                    A
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-bold text-gray-800 truncate">Admin Biofy</p>
+                    <p className="text-[10px] text-gray-400">Administrador</p>
+                  </div>
                 </div>
-                <button 
+                <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-red-500/10 hover:text-red-400 transition-all font-medium text-sm"
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-500 hover:bg-red-50 hover:text-red-500 transition-all text-sm font-medium"
                 >
-                  <LogOut className="w-5 h-5" />
+                  <LogOut className="w-4 h-4" />
                   Cerrar Sesión
                 </button>
               </div>
@@ -119,10 +135,28 @@ export default function RootLayout({
           )}
         </AnimatePresence>
 
-        {/* Main Content Area */}
-        <main className="flex-1 h-screen overflow-y-auto bg-[#09090b] relative">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-          <div className="p-8 max-w-7xl mx-auto min-h-full">
+        {/* Main content */}
+        <main className="flex-1 h-screen overflow-y-auto bg-[#F4F4FB]">
+          {/* Top bar */}
+          <div className="sticky top-0 z-30 bg-[#F4F4FB]/90 backdrop-blur-sm border-b border-gray-200/60 px-8 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-2 border border-gray-200 shadow-sm w-64">
+              <Search className="w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Buscar..."
+                className="bg-transparent text-sm text-gray-600 placeholder-gray-400 outline-none w-full"
+              />
+            </div>
+            <div className="flex items-center gap-3">
+              <button className="relative p-2 bg-white rounded-xl border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors">
+                <Bell className="w-4 h-4 text-gray-500" />
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">3</span>
+              </button>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-violet-500 shadow-sm" />
+            </div>
+          </div>
+
+          <div className="p-8 max-w-7xl mx-auto">
             {children}
           </div>
         </main>

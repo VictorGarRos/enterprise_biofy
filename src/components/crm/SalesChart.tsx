@@ -1,8 +1,6 @@
 'use client';
 
-import React from 'react';
 import {
-    BarChart,
     Bar,
     XAxis,
     YAxis,
@@ -49,20 +47,20 @@ export function SalesChart({
         <div className="premium-card p-6 h-[400px]">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
                 <div>
-                    <h3 className="text-lg font-bold text-white tracking-tight">{title}</h3>
-                    <p className="text-xs text-zinc-500 font-medium">{subtitle}</p>
+                    <h3 className="text-base font-bold text-gray-900 tracking-tight">{title}</h3>
+                    <p className="text-xs text-gray-400 font-medium">{subtitle}</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
                     {activeBars.map(bar => (
                         <div key={bar.key} className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full" style={{ backgroundColor: bar.color }}></span>
-                            <span className="text-xs font-bold text-zinc-400 capitalize">{bar.name}</span>
+                            <span className="text-xs font-bold text-gray-500 capitalize">{bar.name}</span>
                         </div>
                     ))}
                     {activeLines.map(line => (
                         <div key={line.key} className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full" style={{ backgroundColor: line.color }}></span>
-                            <span className="text-xs font-bold text-zinc-400 capitalize">{line.name}</span>
+                            <span className="text-xs font-bold text-gray-500 capitalize">{line.name}</span>
                         </div>
                     ))}
                 </div>
@@ -78,22 +76,23 @@ export function SalesChart({
                             </linearGradient>
                         ))}
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e1e24" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
                     <XAxis
                         dataKey="date"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fill: '#52525b', fontSize: 11, fontWeight: 700 }}
+                        tick={{ fill: '#9CA3AF', fontSize: 11, fontWeight: 600 }}
                         dy={10}
                     />
                     <YAxis
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fill: '#52525b', fontSize: 11, fontWeight: 700 }}
+                        tick={{ fill: '#9CA3AF', fontSize: 11, fontWeight: 600 }}
                     />
                     <Tooltip
-                        contentStyle={{ borderRadius: '12px', border: '1px solid #27272a', background: '#09090b', boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
-                        itemStyle={{ color: '#fff', fontSize: '11px', fontWeight: 'bold' }}
+                        contentStyle={{ borderRadius: '12px', border: '1px solid #E5E7EB', background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
+                        itemStyle={{ color: '#374151', fontSize: '11px', fontWeight: 'bold' }}
+                        labelStyle={{ color: '#111827', fontWeight: 700 }}
                     />
 
                     {activeBars.map(bar => (
